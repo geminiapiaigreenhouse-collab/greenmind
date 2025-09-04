@@ -3,88 +3,758 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GreenMind – AI Hydroponics</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
+  <title>GreenMind – AI Hydroponics Revolution</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0a0a0a;
+      color: #ffffff;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Animated Background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.1;
+    }
+
+    .floating-particles {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #00ff88;
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      50% { transform: translateY(-100px) rotate(180deg); opacity: 0.3; }
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: radial-gradient(circle at 50% 50%, rgba(0, 255, 136, 0.15) 0%, rgba(10, 10, 10, 0.9) 70%);
+      position: relative;
+      padding: 2rem;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent 30%, rgba(0, 255, 136, 0.03) 50%, transparent 70%);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { transform: translateX(-100%); }
+      50% { transform: translateX(100%); }
+    }
+
+    .logo {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #00ff88, #00cc6a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.3)); }
+      to { filter: drop-shadow(0 0 30px rgba(0, 255, 136, 0.6)); }
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      opacity: 0.8;
+      max-width: 600px;
+      margin-bottom: 2rem;
+      animation: fadeInUp 1s ease 0.5s both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 0.8; transform: translateY(0); }
+    }
+
+    .school-credit {
+      font-size: 1rem;
+      opacity: 0.6;
+      margin-top: 2rem;
+      padding: 1rem;
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      border-radius: 10px;
+      background: rgba(0, 255, 136, 0.05);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Content Sections */
+    .section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section h2 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, #ffffff, #00ff88);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Problem Section */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .problem-card {
+      background: linear-gradient(135deg, rgba(255, 0, 0, 0.1), rgba(255, 100, 100, 0.05));
+      border: 1px solid rgba(255, 100, 100, 0.2);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .problem-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(255, 0, 0, 0.2);
+    }
+
+    .problem-card i {
+      font-size: 3rem;
+      color: #ff6b6b;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    /* Solution Section */
+    .solution {
+      background: rgba(0, 255, 136, 0.05);
+      border-radius: 30px;
+      padding: 4rem 2rem;
+      margin: 4rem 0;
+      border: 1px solid rgba(0, 255, 136, 0.2);
+    }
+
+    .solution-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .solution-card {
+      background: rgba(0, 255, 136, 0.1);
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .solution-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+      transform: rotate(45deg);
+      transition: all 0.5s ease;
+      opacity: 0;
+    }
+
+    .solution-card:hover::before {
+      opacity: 1;
+      animation: rotate 2s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .solution-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 255, 136, 0.3);
+    }
+
+    .solution-card i {
+      font-size: 3rem;
+      color: #00ff88;
+      margin-bottom: 1rem;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 2rem 1rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      background: rgba(0, 255, 136, 0.1);
+      border-color: rgba(0, 255, 136, 0.3);
+    }
+
+    .feature-card i {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #00ff88;
+      display: block;
+    }
+
+    /* Dashboard Preview */
+    .dashboard-preview {
+      margin: 4rem 0;
+      text-align: center;
+    }
+
+    .dashboard-mockup {
+      max-width: 800px;
+      margin: 2rem auto;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0, 255, 136, 0.2);
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      background: #1a1a1a;
+      padding: 2rem;
+    }
+
+    .sensor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .sensor-card {
+      background: rgba(0, 255, 136, 0.1);
+      border-radius: 10px;
+      padding: 1.5rem;
+      border: 1px solid rgba(0, 255, 136, 0.2);
+    }
+
+    .sensor-value {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #00ff88;
+      margin-bottom: 0.5rem;
+    }
+
+    .sensor-label {
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    /* Results Section */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .result-card {
+      background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 200, 100, 0.05));
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .result-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 255, 136, 0.2);
+    }
+
+    .result-card i {
+      font-size: 2.5rem;
+      color: #00ff88;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    /* Future Plans */
+    .future-timeline {
+      position: relative;
+      margin-top: 3rem;
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      border-left: 4px solid #00ff88;
+      transition: all 0.3s ease;
+    }
+
+    .timeline-item:hover {
+      background: rgba(0, 255, 136, 0.1);
+      transform: translateX(10px);
+    }
+
+    .timeline-icon {
+      font-size: 2rem;
+      color: #00ff88;
+      margin-right: 2rem;
+    }
+
+    /* Open Source Banner */
+    .opensource-banner {
+      background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 200, 100, 0.1));
+      border: 2px solid rgba(0, 255, 136, 0.4);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      margin: 4rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .opensource-banner::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+      animation: sweep 4s ease-in-out infinite;
+    }
+
+    @keyframes sweep {
+      0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+
+    .opensource-banner h3 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .opensource-banner p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .hero p { font-size: 1.2rem; }
+      .section h2 { font-size: 2rem; }
+      .section { padding: 3rem 1rem; }
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.1);
+      z-index: 1000;
+    }
+
+    .scroll-progress {
+      width: 100%;
+      background: linear-gradient(to bottom, #00ff88, #00cc6a);
+      height: 0%;
+      transition: height 0.1s ease;
+    }
+  </style>
 </head>
 <body>
+  <!-- Animated Background -->
+  <div class="bg-animation"></div>
+  
+  <!-- Scroll Indicator -->
+  <div class="scroll-indicator">
+    <div class="scroll-progress"></div>
+  </div>
+
+  <!-- Hero Section -->
   <header class="hero">
-    <img src="assets/logo.png" alt="GreenMind Logo" class="logo" />
-    <h1>GreenMind 🌱</h1>
+    <div class="logo">🌱</div>
+    <h1>GreenMind</h1>
     <p>AI + IoT Powered Hydroponics for a Sustainable Future</p>
-    <img src="assets/school_logo.png" alt="School Logo" class="school-logo" />
+    <div class="school-credit">
+      <strong>Developed by students of<br>Sargachi Ramakrishna Mission High School (H.S.)</strong>
+    </div>
   </header>
 
   <main>
-    <section class="problem">
-      <h2>🚜 The Problem</h2>
-      <ul>
-        <li>High water usage 💧</li>
-        <li>Soil depletion & pesticides 🌍</li>
-        <li>Climate dependence ☀️🌧️</li>
-        <li>Space shortage 🏙️</li>
-      </ul>
-    </section>
-
-    <section class="solution">
-      <h2>💡 Our Solution</h2>
-      <p>GreenMind = Hydroponics + AI + IoT</p>
-      <ul>
-        <li>Soil-less, water-saving farming</li>
-        <li>AI automates fan, pump, grow light</li>
-        <li>Multiple controls: Mobile App, Touch Switch, OLED, AI Chatbot</li>
-        <li>Real-time monitoring</li>
-      </ul>
-    </section>
-
-    <section class="features">
-      <h2>⚡ Features</h2>
-      <div class="grid">
-        <div>🤖 AI Automation</div>
-        <div>📱 Smart App</div>
-        <div>🖲️ Touch Control</div>
-        <div>💡 Energy Efficient</div>
-        <div>📊 Real-Time Monitoring</div>
-        <div>🌿 Soil-less Farming</div>
+    <!-- Problem Section -->
+    <section class="section">
+      <h2><i class="fas fa-exclamation-triangle"></i> The Problem</h2>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <i class="fas fa-tint"></i>
+          <h3>High Water Usage</h3>
+          <p>Traditional farming wastes massive amounts of water through inefficient irrigation</p>
+        </div>
+        <div class="problem-card">
+          <i class="fas fa-globe-americas"></i>
+          <h3>Soil Depletion</h3>
+          <p>Chemical pesticides and over-farming are destroying our precious soil</p>
+        </div>
+        <div class="problem-card">
+          <i class="fas fa-cloud-sun-rain"></i>
+          <h3>Climate Dependence</h3>
+          <p>Weather unpredictability threatens food security worldwide</p>
+        </div>
+        <div class="problem-card">
+          <i class="fas fa-city"></i>
+          <h3>Space Shortage</h3>
+          <p>Urban areas lack sufficient space for traditional farming methods</p>
+        </div>
       </div>
     </section>
 
-    <section class="how">
-      <h2>🔎 How It Works</h2>
-      <img src="assets/diagram.png" alt="How It Works" class="diagram" />
+    <!-- Solution Section -->
+    <section class="section">
+      <div class="solution">
+        <h2><i class="fas fa-lightbulb"></i> Our Solution</h2>
+        <p style="font-size: 1.5rem; margin-bottom: 2rem; text-align: center;">
+          <strong>GreenMind = Hydroponics + AI + IoT</strong>
+        </p>
+        <div class="solution-grid">
+          <div class="solution-card">
+            <i class="fas fa-seedling"></i>
+            <h3>Soil-less Farming</h3>
+            <p>Revolutionary hydroponic system that saves 90% more water</p>
+          </div>
+          <div class="solution-card">
+            <i class="fas fa-robot"></i>
+            <h3>AI Automation</h3>
+            <p>Smart AI controls fan, pump, and grow lights automatically</p>
+          </div>
+          <div class="solution-card">
+            <i class="fas fa-mobile-alt"></i>
+            <h3>Multi-Control Interface</h3>
+            <p>Control via Mobile App, Touch Switch, OLED, and AI Chatbot</p>
+          </div>
+          <div class="solution-card">
+            <i class="fas fa-chart-line"></i>
+            <h3>Real-time Monitoring</h3>
+            <p>Live data tracking with intelligent insights and alerts</p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section class="results">
-      <h2>✅ Current Results</h2>
-      <ul>
-        <li>🌿 Grew Tulsi, Mint, Lemon, Aparajita</li>
-        <li>🤖 Fully automated fan, pump, and light</li>
-        <li>📱 Works with App, Switch, OLED, Chatbot</li>
-        <li>💡 Energy efficient</li>
-        <li>📊 Real-time monitoring</li>
-        <li>🏫 Ready demo prototype</li>
-      </ul>
+    <!-- Dashboard Preview -->
+    <section class="section dashboard-preview">
+      <h2><i class="fas fa-tv"></i> Live Dashboard</h2>
+      <div class="dashboard-mockup">
+        <h3 style="color: #00ff88; margin-bottom: 2rem;">Environmental Sensors</h3>
+        <div class="sensor-grid">
+          <div class="sensor-card">
+            <div class="sensor-value">37.76</div>
+            <div class="sensor-label">pH Level</div>
+          </div>
+          <div class="sensor-card">
+            <div class="sensor-value">-0.2°C</div>
+            <div class="sensor-label">Air Temp</div>
+          </div>
+          <div class="sensor-card">
+            <div class="sensor-value">18%</div>
+            <div class="sensor-label">Light Intensity</div>
+          </div>
+          <div class="sensor-card">
+            <div class="sensor-value">63%</div>
+            <div class="sensor-label">Humidity</div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section class="future">
-      <h2>🌍 Future Plans</h2>
-      <ul>
-        <li>Expand crop variety 🍅🌺</li>
-        <li>Advanced AI for plant health</li>
-        <li>Solar-powered farming ☀️</li>
-        <li>Community & commercial scale 🌆</li>
-      </ul>
+    <!-- Features -->
+    <section class="section">
+      <h2><i class="fas fa-star"></i> Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <i class="fas fa-robot"></i>
+          <h4>AI Automation</h4>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-mobile-alt"></i>
+          <h4>Smart App</h4>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-hand-pointer"></i>
+          <h4>Touch Control</h4>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-bolt"></i>
+          <h4>Energy Efficient</h4>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-chart-bar"></i>
+          <h4>Real-Time Data</h4>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-leaf"></i>
+          <h4>Sustainable</h4>
+        </div>
+      </div>
     </section>
 
-    <section class="team">
-      <h2>👩‍💻 Team & School</h2>
-      <p>Developed by students of <br/><b>Sargachi Ramakrishna Mission High School (H.S.)</b></p>
-      <img src="assets/greenmind_qr.png" alt="QR Code" class="qr" />
+    <!-- Results -->
+    <section class="section">
+      <h2><i class="fas fa-check-circle"></i> Current Results</h2>
+      <div class="results-grid">
+        <div class="result-card">
+          <i class="fas fa-seedling"></i>
+          <h3>Successful Crops</h3>
+          <p>Successfully grew Tulsi, Mint, Lemon, and Aparajita plants with optimal yield</p>
+        </div>
+        <div class="result-card">
+          <i class="fas fa-cogs"></i>
+          <h3>Full Automation</h3>
+          <p>100% automated control of fan, pump, and lighting systems</p>
+        </div>
+        <div class="result-card">
+          <i class="fas fa-mobile"></i>
+          <h3>Multi-Platform Control</h3>
+          <p>Seamlessly works with App, Touch Switch, OLED display, and AI Chatbot</p>
+        </div>
+        <div class="result-card">
+          <i class="fas fa-battery-full"></i>
+          <h3>Energy Optimized</h3>
+          <p>Achieved maximum energy efficiency with smart power management</p>
+        </div>
+        <div class="result-card">
+          <i class="fas fa-eye"></i>
+          <h3>Live Monitoring</h3>
+          <p>Real-time sensor data with intelligent alerts and recommendations</p>
+        </div>
+        <div class="result-card">
+          <i class="fas fa-trophy"></i>
+          <h3>Demo Ready</h3>
+          <p>Fully functional prototype ready for demonstration and testing</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Future Plans -->
+    <section class="section">
+      <h2><i class="fas fa-rocket"></i> Future Plans</h2>
+      <div class="future-timeline">
+        <div class="timeline-item">
+          <div class="timeline-icon"><i class="fas fa-apple-alt"></i></div>
+          <div>
+            <h3>Expand Crop Variety</h3>
+            <p>Add support for tomatoes, peppers, strawberries, and flowering plants</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon"><i class="fas fa-brain"></i></div>
+          <div>
+            <h3>Advanced AI Health Detection</h3>
+            <p>Computer vision for plant disease detection and health monitoring</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon"><i class="fas fa-solar-panel"></i></div>
+          <div>
+            <h3>Solar-Powered Systems</h3>
+            <p>Integrate renewable energy for completely sustainable farming</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon"><i class="fas fa-building"></i></div>
+          <div>
+            <h3>Community & Commercial Scale</h3>
+            <p>Scale up for community gardens and commercial farming operations</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Open Source Banner -->
+    <section class="section">
+      <div class="opensource-banner">
+        <h3><i class="fab fa-github"></i> Coming Soon: Open Source!</h3>
+        <p>We will make GreenMind open source very soon, empowering developers worldwide to contribute to sustainable agriculture technology.</p>
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 GreenMind | MIT License</p>
+    <p>© 2025 GreenMind | Developed by Sargachi Ramakrishna Mission High School (H.S.) Students</p>
+    <p style="opacity: 0.6; margin-top: 1rem;">Innovating for a sustainable future 🌱</p>
   </footer>
+
+  <script>
+    // Floating particles animation
+    function createFloatingParticles() {
+      const container = document.querySelector('.bg-animation');
+      for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'floating-particles';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 6 + 's';
+        particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+        container.appendChild(particle);
+      }
+    }
+
+    // Scroll progress indicator
+    function updateScrollProgress() {
+      const scrollProgress = document.querySelector('.scroll-progress');
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollPercentage = (scrollTop / scrollHeight) * 100;
+      scrollProgress.style.height = scrollPercentage + '%';
+    }
+
+    // Intersection Observer for animations
+    function observeElements() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.section').forEach((section) => {
+        observer.observe(section);
+      });
+    }
+
+    // Smooth hover effects for cards
+    function addCardEffects() {
+      const cards = document.querySelectorAll('.problem-card, .solution-card, .feature-card, .result-card');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'translateY(0) scale(1)';
+        });
+      });
+    }
+
+    // Initialize everything
+    document.addEventListener('DOMContentLoaded', () => {
+      createFloatingParticles();
+      observeElements();
+      addCardEffects();
+      
+      // Update scroll progress on scroll
+      window.addEventListener('scroll', updateScrollProgress);
+      
+      console.log('🌱 GreenMind: Killer web experience loaded!');
+    });
+
+    // Add some extra interactivity for gallery
+    document.querySelectorAll('.gallery-card').forEach(card => {
+      card.addEventListener('click', () => {
+        card.style.transform = 'translateY(-10px) scale(1.02)';
+        setTimeout(() => {
+          card.style.transform = 'translateY(-10px) scale(1)';
+        }, 200);
+      });
+    });
+
+    // Logo placeholder click effect
+    document.querySelector('.logo-placeholder')?.addEventListener('click', () => {
+      const logo = document.querySelector('.logo-placeholder');
+      logo.style.transform = 'scale(1.1)';
+      setTimeout(() => {
+        logo.style.transform = 'scale(1)';
+      }, 200);
+    });
+  </script>
 </body>
 </html>
