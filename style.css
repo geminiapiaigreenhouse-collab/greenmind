@@ -1,0 +1,48 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  color: #222;
+  line-height: 1.6;
+}
+header.hero {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #3CB371, #2E8B57);
+  color: white;
+}
+header.hero .logo {
+  max-width: 100px;
+}
+header.hero .school-logo {
+  max-width: 80px;
+  margin-top: 1rem;
+}
+section {
+  padding: 2rem;
+  text-align: center;
+}
+.features .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.features .grid div {
+  background: #f4f4f4;
+  padding: 1rem;
+  border-radius: 10px;
+}
+.diagram {
+  max-width: 90%;
+}
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #f1f1f1;
+}
+.qr {
+  max-width: 120px;
+  margin-top: 1rem;
+}
